@@ -7,10 +7,11 @@ proc StairCaseSteps(float $stepLength, float $stepWidth, float $stepHeight, int 
     {
         string $tempStep[];
         $tempStep =  `polyCube -name ("stairStep"+$i) -width ($stepWidth) -height ($stepHeight) -depth ($stepLength) -sx 2 -sy 2 -sz 2 -ax 0 1 0 -cuv 4 -ch 1`;
-        move -localSpace 6 ($stepHeight/2) 0;
+        move -localSpace 6 (($stepHeight/2)* $i + ($stepHeight/2) ) 0;
+        xform -ws -a -piv 0 0 0;
+        rotate -y (15 * $i);
         $stairSteps[$i] = $tempStep[0];
     }
     print $stairSteps;
-    // move -worldSpace 0 0 0 $Name.rotatePivot;
 }
-StairCaseSteps(1,3,0.25,3);
+StairCaseSteps(1,3,0.25,75);

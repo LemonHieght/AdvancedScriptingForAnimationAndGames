@@ -1,0 +1,107 @@
+// proc int Addition(int $num1)
+// {
+//     int $tempNum = $num1;
+//     print ("number is " + $tempNum + "\n");
+//     return ($tempNum);
+// }
+// print (Addition(100) + Addition(100) + "\n");
+
+
+// proc string Multiplication()
+// {
+//     int $value[];
+//     for ($i=0; $i< 3; $i++)
+//     {
+//         int $tempNum =`rand 100`;
+//         $value[size($value)] = $tempNum;
+//     }
+
+//     return (intArrayToString($value, " - "));
+// }
+// print (Multiplication());
+
+global proc string Test(int $count[])
+{
+    int $value[];
+    for ($i=0; $i< size($count); $i++)
+    {
+        int $tempNum = $count[$i];
+        $value[size($value)] = $tempNum;
+    }
+
+    return (intArrayToString($value, " - "));
+}
+print (Test({3, 4, 6}));
+
+
+
+global proc string Addition(int $count[])
+{
+    int $total;
+    for ($i=0; $i< size($count); $i++)
+    {
+        int $tempNum = $count[$i];
+        $total += $tempNum; 
+    }
+
+    return ($total);
+}
+global proc string Subtraction(int $count[])
+{
+    int $total;
+    for ($i=0; $i< size($count); $i++)
+    {
+        int $tempNum = $count[$i];
+        $total -= $tempNum; 
+    }
+
+    return ($total);
+}
+global proc string Multiplication(int $count[])
+{
+    int $total;
+    for ($i=0; $i< size($count); $i++)
+    {
+        int $tempNum = $count[$i];
+        $total *= $tempNum; 
+    }
+
+    return ($total);
+}
+global proc string Division(int $count[])
+{
+    int $total;
+    for ($i=0; $i< size($count); $i++)
+    {
+        int $tempNum = $count[$i];
+        $total /= $tempNum; 
+    }
+
+    return ($total);
+}
+
+
+
+proc Calculator(int $operation, int $num[])
+{
+    if ($operation == 1)
+    {
+        string $temp = intArrayToString($num, ", ");
+        print ("The sum of " + $temp + " is " + Addition($num) + "\n");
+    }
+    else if ($operation == 2)
+    {
+        string $temp = intArrayToString($num, ", ");
+        print ("The difference of " + $temp + " is " + Subtraction($num) + "\n");
+    }
+    else if ($operation == 3)
+    {
+        string $temp = intArrayToString($num, ", ");
+        print ("The difference of " + $temp + " is " + Subtraction($num) + "\n");
+    }
+    else
+    {
+        print ("Please pick a vaid number" + "\n");
+    }
+}
+print (Calculator(2, {3,5,4,5}));

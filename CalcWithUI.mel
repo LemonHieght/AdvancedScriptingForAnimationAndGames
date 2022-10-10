@@ -1,0 +1,36 @@
+
+
+global proc WhatsNumberOne()
+{
+    string $field1 = `optionVar -q "firstField"`;
+    string $field2 = `optionVar -q "secondField"`;
+    string $field3 = `optionVar -q "thirdField"`;
+
+    float $value1 = `floatField -q -value $field1`;
+    float $value2 = `floatField -q -value $field2`;
+    float $sum = $value1 + $value2;
+
+    floatField -e -value $sum;
+
+
+    print (`floatField -q -value $field1` + "\n");
+}
+
+string $testWindow = "MY_Test_UI";
+if(`window -exists $testWindow`)
+    deleteUI $testWindow;
+
+
+$testWindow = `window -title "Test Window" -sizeable 1
+                            -height 500 -width 300
+                            $testWindow`;
+    string $mColumn = `columnLayout -adjustableColumn 1 -parent $testWindow`;
+    button -parent $mColumn -label "test" -command "print (\"Hello World \")";
+
+    optionVar - stringValue "firstField" `floatField`;
+    optionVar - stringValue "secondField" `floatField`;
+    optionVar - stringValue "thirdField" `floatField`;
+
+    button -parent $mColumn -label "Float One" -command WhatsNumberOne;
+
+        showWindow $testWindow;

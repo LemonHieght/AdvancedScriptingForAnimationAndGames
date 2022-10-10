@@ -1,25 +1,3 @@
-// proc int Addition(int $num1)
-// {
-//     int $tempNum = $num1;
-//     print ("number is " + $tempNum + "\n");
-//     return ($tempNum);
-// }
-// print (Addition(100) + Addition(100) + "\n");
-
-
-// proc string Multiplication()
-// {
-//     int $value[];
-//     for ($i=0; $i< 3; $i++)
-//     {
-//         int $tempNum =`rand 100`;
-//         $value[size($value)] = $tempNum;
-//     }
-
-//     return (intArrayToString($value, " - "));
-// }
-// print (Multiplication());
-
 global proc string Test(int $count[])
 {
     int $value[];

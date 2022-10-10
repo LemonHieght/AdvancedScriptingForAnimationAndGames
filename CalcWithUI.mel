@@ -10,10 +10,10 @@ global proc WhatsNumberOne()
     float $value2 = `floatField -q -value $field2`;
     float $sum = $value1 + $value2;
 
-    floatField -e -value $sum;
+    floatField -e -value $sum $field3;
 
 
-    print (`floatField -q -value $field1` + "\n");
+    print (`floatField -q -value $field3` + "\n");
 }
 
 string $testWindow = "MY_Test_UI";
@@ -29,8 +29,8 @@ $testWindow = `window -title "Test Window" -sizeable 1
 
     optionVar - stringValue "firstField" `floatField`;
     optionVar - stringValue "secondField" `floatField`;
-    optionVar - stringValue "thirdField" `floatField`;
+    optionVar - stringValue "thirdField" `floatField -editable 0`;
 
-    button -parent $mColumn -label "Float One" -command WhatsNumberOne;
+    button -parent $mColumn -label "Add" -command WhatsNumberOne;
 
         showWindow $testWindow;

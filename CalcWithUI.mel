@@ -1,19 +1,18 @@
 
 
-global proc WhatsNumberOne()
+global proc Addition()
 {
     string $field1 = `optionVar -q "firstField"`;
     string $field2 = `optionVar -q "secondField"`;
     string $field3 = `optionVar -q "thirdField"`;
+    string $field4 = `optionVar -q "textSolution"`;
 
     float $value1 = `floatField -q -value $field1`;
     float $value2 = `floatField -q -value $field2`;
     float $sum = $value1 + $value2;
 
     floatField -e -value $sum $field3;
-
-
-    print (`floatField -q -value $field3` + "\n");
+    textField -e -text ("The sum of " + $value1 + " and " + $value2 + " is equal to " + $sum + ".") $field4;
 }
 
 string $testWindow = "MY_Test_UI";
@@ -27,10 +26,11 @@ $testWindow = `window -title "Test Window" -sizeable 1
     string $mColumn = `columnLayout -adjustableColumn 1 -parent $testWindow`;
     button -parent $mColumn -label "test" -command "print (\"Hello World \")";
 
-    optionVar - stringValue "firstField" `floatField`;
-    optionVar - stringValue "secondField" `floatField`;
-    optionVar - stringValue "thirdField" `floatField -editable 0`;
+    optionVar -stringValue "firstField" `floatField`;
+    optionVar -stringValue "secondField" `floatField`;
+    optionVar -stringValue "thirdField" `floatField -editable 0`;
+    optionVar -stringValue "textSolution" `textField -editable 0`;
 
-    button -parent $mColumn -label "Add" -command WhatsNumberOne;
+    button -parent $mColumn -label "Add" -command Addition;
 
         showWindow $testWindow;

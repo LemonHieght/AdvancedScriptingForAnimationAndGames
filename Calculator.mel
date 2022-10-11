@@ -1,18 +1,3 @@
-global proc string Test(int $count[])
-{
-    int $value[];
-    for ($i=0; $i< size($count); $i++)
-    {
-        int $tempNum = $count[$i];
-        $value[size($value)] = $tempNum;
-    }
-
-    return (intArrayToString($value, " - "));
-}
-print (Test({3, 4, 6}));
-
-
-
 global proc string Addition(float $count[])
 {
     float $total;
@@ -77,38 +62,69 @@ global proc string Mean(float $count[])
     return ($total);
 }
 
-proc Calculator(int $operation, float $num[])
+global proc string Calculator(int $operation, float $num[])
 {
-    print ("Addition = 1" + "\n" + "Subtraction = 2" + "\n" + "Multiplication = 3" + "\n" + "Division = 4" + "\n" + "Mean = 5" + "\n" + "You Selected " + $operation + "\n");
-    
     if ($operation == 1)
     {
         string $temp = floatArrayToString($num, ", ");
-        print ("The sum of " + $temp + " is " + Addition($num) + "\n");
+        return ("The sum of " + $temp + " is " + Addition($num) + "\n");
     }
     else if ($operation == 2)
     {
         string $temp = floatArrayToString($num, ", ");
-        print ("The difference of " + $temp + " is " + Subtraction($num) + "\n");
+        return ("The difference of " + $temp + " is " + Subtraction($num) + "\n");
     }
     else if ($operation == 3)
     {
         string $temp = floatArrayToString($num, ", ");
-        print ("The product of " + $temp + " is " + Multiplication($num) + "\n");
+        return ("The product of " + $temp + " is " + Multiplication($num) + "\n");
     }
     else if ($operation == 4)
     {
         string $temp = floatArrayToString($num, ", ");
-        print ("The quotient of " + $temp + " is " + Division($num) + "\n");
+        return ("The quotient of " + $temp + " is " + Division($num) + "\n");
     }
     else if ($operation == 5)
     {
         string $temp = floatArrayToString($num, ", ");
-        print ("The mean of " + $temp + " is " + Mean($num) + "\n");
+        return ("The mean of " + $temp + " is " + Mean($num) + "\n");
     }
     else
     {
         print ("Please pick a vaid number" + "\n");
     }
 }
-print (Calculator(5, {3,5,4,5}));
+// print (Calculator(5, {3,5,4,5}));
+
+global proc CalcButtonCmd()
+{
+    string $operationField = `optionVar -q "operationButtons"`;
+    string $resultField = `optionVar - q "displayResults"`;
+    // string $numField = `optionVar -q "arrayMaybe"`;
+
+    string $opera = `radioButtonGrp -q -select $operationField`;
+    // string $num[] = `floatFieldGrp -q -value $numField`;
+
+
+    string $return = Calculator($opera, {3,5,4,5});
+    textField -e -text $return $resultField;
+}
+
+global proc CalcUI()
+{
+    string $calcWindow = "MyCalculator";
+    if(`window -exists $calcWindow`)
+        deleteUI $calcWindow;
+
+    $calcWindow = `window -title "Calculator" -sizeable 1
+                                -height 500 -width 300
+                                -rtf 1$calcWindow`;
+        string $mColumn = `columnLayout -adjustableColumn 1 -parent $calcWindow`;
+            // optionVar -stringValue "arrayMaybe" `floatFieldGrp -nf 4 -parent $mColumn`;
+            optionVar -stringValue "operationButtons" `radioButtonGrp -numberOfRadioButtons 4 -parent $mColumn -labelArray4 "Addition" "Subtration" "Multiplication" "Divison"`;
+            button -parent $mColumn -label "Equal" -command "CalcButtonCmd";
+            optionVar -stringValue "displayResults" `textField -parent $mColumn -editable 0`;
+    showWindow $calcWindow;
+}
+
+CalcUI();

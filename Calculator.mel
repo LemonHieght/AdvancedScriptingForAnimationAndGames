@@ -98,15 +98,19 @@ global proc string Calculator(int $operation, float $num[])
 
 global proc CalcButtonCmd()
 {
-    string $operationField = `optionVar -q "operationButtons"`;
+    // string $operationField = `optionVar -q "operationButtons"`;
+    string $opField = `optionVar - q "radioCollect"`;
     string $resultField = `optionVar - q "displayResults"`;
-    // string $numField = `optionVar -q "arrayMaybe"`;
+    string $numField = `optionVar -q "arrayMaybe"`;
 
-    string $opera = `radioButtonGrp -q -select $operationField`;
-    // string $num[] = `floatFieldGrp -q -value $numField`;
+    string $opera = `radioCollection -q -select $opField`;
+    string $op = `radioButton -q -data $opera`;
+    float $num[] = `floatFieldGrp -q -value $numField`;
+
+    print ($op);
 
 
-    string $return = Calculator($opera, {3,5,4,5});
+    string $return = Calculator($op, $num);
     textField -e -text $return $resultField;
 }
 
@@ -120,8 +124,22 @@ global proc CalcUI()
                                 -height 500 -width 300
                                 -rtf 1$calcWindow`;
         string $mColumn = `columnLayout -adjustableColumn 1 -parent $calcWindow`;
-            // optionVar -stringValue "arrayMaybe" `floatFieldGrp -nf 4 -parent $mColumn`;
-            optionVar -stringValue "operationButtons" `radioButtonGrp -numberOfRadioButtons 4 -parent $mColumn -labelArray4 "Addition" "Subtration" "Multiplication" "Divison"`;
+            optionVar -stringValue "arrayMaybe" `floatFieldGrp -nf 4 -parent $mColumn`;
+            // optionVar -stringValue "operationButtons" `radioButtonGrp -numberOfRadioButtons 4 -parent $mColumn -labelArray4 "Addition" "Subtration" "Multiplication" "Divison"`;
+            
+            string $collection1 = `radioCollection -parent $mColumn`;
+
+            
+
+            radioButton -collection $collection1 -parent $mColumn -label "Addition" -data 1;
+            radioButton -collection $collection1 -parent $mColumn -label "Subtraction" -data 2;
+            radioButton -collection $collection1 -parent $mColumn -label "Multiplacation" -data 3;
+            radioButton -collection $collection1 -parent $mColumn -label "Division" -data 4;
+            radioButton -collection $collection1 -parent $mColumn -label "Mean" -data 5;
+
+            optionVar -stringValue "radioCollect" $collection1;
+
+            
             button -parent $mColumn -label "Equal" -command "CalcButtonCmd";
             optionVar -stringValue "displayResults" `textField -parent $mColumn -editable 0`;
     showWindow $calcWindow;

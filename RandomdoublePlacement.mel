@@ -19,9 +19,7 @@ global proc Addition()
         float $x = $rando.x;
         float $y = $rando.y;
         float $z = $rando.z;
-        // move -worldSpace $min[0] $min[1] $min[2];
         move -worldSpace $x $y $z $double[$i];
-        // setAttr ($i + ".t") ;
         print ($x + "\n");
     }
 }

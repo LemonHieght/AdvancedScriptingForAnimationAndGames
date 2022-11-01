@@ -15,6 +15,6 @@ cmds.polySphere(name="Head", radius=radiusHead, subdivisionsX=20, subdivisionsY=
 cmds.move(0, ((((radiusPrime*2)+(radiusBody*2))+radiusHead)-(radiusBody+(radiusHead/2))), 0)
 
 cmds.polyCone(name="nose", radius=radiusNose, height=radiusHead, subdivisionsX=5, subdivisionsY=1, subdivisionsZ=0, axis=[0, 1, 0], roundCap=True, createUVs=3, constructionHistory=True)
-cmds.setAttr ("nose.rotateX", 90)
-cmds.setAttr ("nose.translateY", ((((radiusPrime*2)+(radiusBody*2))+radiusHead)-(radiusBody+(radiusHead/2))))
-cmds.setAttr ("nose.translateZ", (radiusHead+(radiusHead/2.5)))
+cmds.setAttr("nose.rotateX", 90)
+cmds.setAttr("nose.translateY", ((((radiusPrime*2)+(radiusBody*2))+radiusHead)-(radiusBody+(radiusHead/2))))
+cmds.setAttr("nose.translateZ", (radiusHead+(radiusHead/2.5)))

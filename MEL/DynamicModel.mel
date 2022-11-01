@@ -1,0 +1,34 @@
+//Variables
+
+rand $rando 30;
+
+float $radiusPrime = 10;
+float $radiusBody = ($radiusPrime/1.5);
+float $radiusHead = ($radiusPrime/2);
+float $radiusNose = ($radiusPrime/10);
+
+//Snowman
+
+//the base
+polySphere -name "base" -radius $radiusPrime -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative 0 $radiusPrime 0;
+move -r 0 (-$radiusPrime) 0 base.scalePivot base.rotatePivot ;
+
+//the body
+polySphere -name "body" -radius $radiusPrime -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+polySphere -edit -radius $radiusBody;
+move -relative 0 ((($radiusPrime*2)+ $radiusBody)-($radiusBody)) 0 "body";
+// print (`polySphere -q -subdivisionsX`);
+
+//the head
+polySphere -name "head" -radius $radiusHead -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+setAttr "head.translateY" (((($radiusPrime*2)+($radiusBody*2))+$radiusHead)-($radiusBody+($radiusHead/2)));
+
+//the carrot nose
+polyCone -name "nose" -radius $radiusNose -height $radiusHead -subdivisionsX 5 -subdivisionsY 1 -subdivisionsZ 0 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+//Potition of the object
+setAttr "nose.rotateX" 90;
+setAttr "nose.translateY" (((($radiusPrime*2)+($radiusBody*2))+$radiusHead)-($radiusBody+($radiusHead/2)));
+setAttr "nose.translateZ" ($radiusHead+($radiusHead/2.5));
+
+

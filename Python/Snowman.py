@@ -18,3 +18,6 @@ cmds.polyCone(name="nose", radius=radiusNose, height=radiusHead, subdivisionsX=5
 cmds.setAttr("nose.rotateX", 90)
 cmds.setAttr("nose.translateY", ((((radiusPrime*2)+(radiusBody*2))+radiusHead)-(radiusBody+(radiusHead/2))))
 cmds.setAttr("nose.translateZ", (radiusHead+(radiusHead/2.5)))
+
+
+
